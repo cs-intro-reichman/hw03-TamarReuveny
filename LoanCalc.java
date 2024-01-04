@@ -1,3 +1,5 @@
+import java.util.Set;
+
 /**
 * Computes the periodical payment necessary to re-pay a given loan.
 */
@@ -38,9 +40,31 @@ public class LoanCalc {
 	* the number of periods (n), and epsilon, a tolerance level.
 	*/
 	// Side effect: modifies the class variable iterationCounter.
-    public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {  
-    	// Replace the following statement with your code
-    	return 0;
+    public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
+		
+		double g = loan/n;
+
+		while (g >= epsilon) {
+
+		    for (int i = 0 ; i < n ; i ++) {
+
+			     double temp = (loan - g);
+
+			     temp = temp * (rate/100);
+		    }
+
+		
+
+			g+= 0.0001;
+			
+		}
+
+
+
+		}
+		
+		
+    	return temp;
     }
     
     /**
@@ -51,8 +75,33 @@ public class LoanCalc {
 	*/
 	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
-    	// Replace the following statement with your code
-    	return 0;
+
+		double L = 0;
+
+		double H = loan;
+
+    	double g = (L + H)/2.0;
+
+		
+
+        while (H - L) > epsilon {
+
+			if ( ) {
+
+				L = g;
+			} else {
+
+				H = g;
+			}
+
+        // Sets L and H for the next iteration
+
+// the solution must be between g and H // so set L or H accordingly
+
+// the solution must be between L and g // so set L or H accordingly
+// Computes the mid-value (𝑔) for the next iteration }
+
+    	return g;
     }
 	
 	/**
@@ -61,6 +110,33 @@ public class LoanCalc {
 	*/
 	private static double endBalance(double loan, double rate, int n, double payment) {
 		// Replace the following statement with your code
-    	return 0;
+
+		int x = loan;
+
+		for (int i = 0 ; i < n; i++) {
+
+			x = (x - payment);
+			
+			x = x * (rate/100);
+		}
+
+		return x;
+
+		}
 	}
 }
+
+
+
+		
+
+
+
+			
+		
+
+		
+
+
+
+
