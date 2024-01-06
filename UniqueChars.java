@@ -6,7 +6,6 @@ public class UniqueChars {
 
         System.out.println(uniqueChars(str));
     }
-
     /**
      * Returns a string which is identical to the original string, 
      * except that all the duplicate characters are removed,
