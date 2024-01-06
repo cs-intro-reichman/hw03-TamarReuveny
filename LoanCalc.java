@@ -6,7 +6,7 @@ import java.util.Set;
 public class LoanCalc {
 	
 	static double epsilon = 0.001;  // The computation tolerance (estimation error)
-	static int iterationCounter;    // Monitors the efficiency of the calculation
+	static int iterationCounter = 0;   // Monitors the efficiency of the calculation
 	
     /** 
      * Gets the loan data and computes the periodical payment.
@@ -44,27 +44,21 @@ public class LoanCalc {
 		
 		double g = loan/n;
 
-		while (g >= epsilon) {
+		double f = endBalance(loan, rate, n, g);
 
-		    for (int i = 0 ; i < n ; i ++) {
+		double bfEpsilon = 0.0001;
 
-			     double temp = (loan - g);
+		while (Math.abs(f) >= epsilon) {
 
-			     temp = temp * (rate/100);
-		    }
+			g = g + bfEpsilon;
 
-		
+			f = endBalance(loan, rate, n, g);
 
-			g+= 0.0001;
-			
-		}
-
-
+			iterationCounter++;
 
 		}
 		
-		
-    	return temp;
+    	return g;
     }
     
     /**
@@ -74,25 +68,44 @@ public class LoanCalc {
 	* the number of periods (n), and epsilon, a tolerance level.
 	*/
 	// Side effect: modifies the class variable iterationCounter.
-    public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
+    public static double bisectionSolver(double loan, double rate, int n, double epsilon) { 
+		
+		iterationCounter = 0;
 
 		double L = 0;
 
 		double H = loan;
 
-    	double g = (L + H)/2.0;
+    	double g = (L + H)/n;
 
+		double fL = endBalance(loan, rate, n,L);
+
+		double fH = endBalance(loan, rate, n, H);
+
+		double fg = endBalance(loan, rate, n, g);
 		
+        while ((H - L) > epsilon) {
 
-        while (H - L) > epsilon {
-
-			if ( ) {
-
-				L = g;
-			} else {
+			if ((fg * fL) > 0) {
 
 				H = g;
-			}
+
+				fH = fg;
+
+			} else {
+
+					L = g;
+
+					fL = fg;
+				}
+
+				g = g + epsilon;
+
+				fg = endBalance(loan, rate, n, g);
+
+				iterationCounter++;
+
+				}
 
         // Sets L and H for the next iteration
 
@@ -111,7 +124,7 @@ public class LoanCalc {
 	private static double endBalance(double loan, double rate, int n, double payment) {
 		// Replace the following statement with your code
 
-		int x = loan;
+		double x = loan;
 
 		for (int i = 0 ; i < n; i++) {
 
@@ -124,7 +137,8 @@ public class LoanCalc {
 
 		}
 	}
-}
+
+
 
 
 
