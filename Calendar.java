@@ -7,6 +7,7 @@ public class Calendar {
 	static int dayOfMonth = 1;   
 	static int month = 1;
 	static int year = 1900;
+	static int dayOfWeek = 2;
 	static int nDaysInMonth = 31; // Number of days in January
 	
 	/** 
@@ -17,62 +18,68 @@ public class Calendar {
 
 		int y = Integer.parseInt(args[0]);
 
+		while (year < y) {
+
+			advance();
+		}
+
+		while (year == y) {
+
+			if (dayOfWeek == 1) {
+
+				System.out.println(dayOfMonth + "/" + month + "/" + year + " Sunday");
+
+			} else {
+
+				System.out.println(dayOfMonth + "/" + month + "/" + year);
+
+				}
+
+				advance();
+
+			}
+		}
+
 		// Advances the date and the day-of-the-week from 1/1/1900 till 31/12/1999, inclusive.
 	    // Prints each date dd/mm/yyyy in a separate line. If the day is a Sunday, prints "Sunday".
 	    // The following variable, used for debugging purposes, counts how many days were advanced so far.
 	    //// Write the necessary initialization code, and replace the condition
 	    //// of the while loop with the necessary condition
 		
-		if (year >= y) {
-
-			year++;
-		}
-
-	 	while (year <= y) {
-
-			year = y;
-	 		//// Write the body of the while 		
-	 		advance();
-
-			year++;
-	 		
-        }
+		
+        
 	 	//// Write the necessary ending code here
-	 }
+	 
 	
 	 // Advances the date (day, month, year) and the day-of-the-week.
 	 // If the month changes, sets the number of days in this month.
 	 // Side effects: changes the static variables dayOfMonth, month, year, dayOfWeek, nDaysInMonth.
 	 private static void advance() {
 
-			while (month <= 12) {
+		dayOfWeek = (dayOfWeek % 7) + 1;
 
-			    while (dayOfMonth <= nDaysInMonth) {
+		    dayOfMonth ++;
 
-			     	System.out.println(dayOfMonth + "/" + month + "/" + year);
+			if (dayOfMonth > nDaysInMonth(month,year)) {
 
-					dayOfMonth ++;
+				dayOfMonth = 1;
 
-					}
+				month++;
 
-					month++;	
+				if (month > 12) {
 
-					nDaysInMonth = nDaysInMonth(month,year);
+					month = 1;
 
-					dayOfMonth = 1;
+					year++;
+				}
 				
 			}
-
-			year++;
-		
-         }
-
-	 
-		 
+		}
+ 
     // Returns true if the given year is a leap year, false otherwise.
 	private static boolean isLeapYear(int year) {
 
-		if (year % 4 == 0) {
+		if ((year % 4 == 0) || ((year % 100 == 0) && (year % 400 != 0))){
 
 			return true;
 
@@ -113,6 +120,8 @@ public class Calendar {
 
 		return numbeOfDays;
 		
-		}
-	
 	}
+}
+
+	
+	

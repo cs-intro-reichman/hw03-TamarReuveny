@@ -6,7 +6,7 @@ import java.util.Set;
 public class LoanCalc {
 	
 	static double epsilon = 0.001;  // The computation tolerance (estimation error)
-	static int iterationCounter = 0;   // Monitors the efficiency of the calculation
+	static int iterationCounter;   // Monitors the efficiency of the calculation
 	
     /** 
      * Gets the loan data and computes the periodical payment.
@@ -44,15 +44,9 @@ public class LoanCalc {
 		
 		double g = loan/n;
 
-		double f = endBalance(loan, rate, n, g);
+		while (endBalance(loan, rate, n, g) > 0 ) {
 
-		double bfEpsilon = 0.0001;
-
-		while (Math.abs(f) >= epsilon) {
-
-			g = g + bfEpsilon;
-
-			f = endBalance(loan, rate, n, g);
+			g = g + epsilon;
 
 			iterationCounter++;
 
@@ -69,39 +63,27 @@ public class LoanCalc {
 	*/
 	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) { 
-		
+
 		iterationCounter = 0;
 
-		double L = 0;
+		double L = (loan/n);
 
 		double H = loan;
 
-    	double g = (L + H)/n;
-
-		double fL = endBalance(loan, rate, n,L);
-
-		double fH = endBalance(loan, rate, n, H);
-
-		double fg = endBalance(loan, rate, n, g);
+    	double g = (L + H)/2;
 		
         while ((H - L) > epsilon) {
 
-			if ((fg * fL) > 0) {
+			if ((endBalance(loan, rate, n, g)) * (endBalance(loan, rate, n, L)) > 0) {
 
-				H = g;
-
-				fH = fg;
+				L = g;
 
 			} else {
 
-					L = g;
-
-					fL = fg;
+					H = g;
 				}
 
-				g = g + epsilon;
-
-				fg = endBalance(loan, rate, n, g);
+				g = (L+H)/2;
 
 				iterationCounter++;
 
@@ -124,33 +106,16 @@ public class LoanCalc {
 	private static double endBalance(double loan, double rate, int n, double payment) {
 		// Replace the following statement with your code
 
-		double x = loan;
+		double x = 0;
 
 		for (int i = 0 ; i < n; i++) {
 
-			x = (x - payment);
+			x = (loan - payment) * ((rate/100) + 1);
 			
-			x = x * (rate/100);
+			loan = x;
 		}
 
 		return x;
 
 		}
 	}
-
-
-
-
-
-		
-
-
-
-			
-		
-
-		
-
-
-
-
