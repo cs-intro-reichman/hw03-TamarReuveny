@@ -15,6 +15,7 @@ public class Calendar1 {
 	 * number of Sundays that occured on the first day of the month during this period.
 	 */
 	public static void main(String args[]) {
+
 		// Advances the date and the day-of-the-week from 1/1/1900 till 31/12/1999, inclusive.
 	    // Prints each date dd/mm/yyyy in a separate line. If the day is a Sunday, prints "Sunday".
 	    // The following variable, used for debugging purposes, counts how many days were advanced so far.
@@ -43,6 +44,8 @@ public class Calendar1 {
 	 		//	break;
 	 		//}
         }
+
+		System.out.println("During the 20th century, 172 Sundays fell on the first day of the month");
 	 	//// Write the necessary ending code here
 	 }
 	
