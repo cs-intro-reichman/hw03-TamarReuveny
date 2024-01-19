@@ -16,14 +16,15 @@ public class Calendar {
 	 */
 	public static void main(String args[]) {
 
-		int y = Integer.parseInt(args[0]);
+		// #feedback: use meaningful name...
+		int requiredYear = Integer.parseInt(args[0]);
 
-		while (year < y) {
+		while (year < requiredYear) {
 
 			advance();
 		}
 
-		while (year == y) {
+		while (year == requiredYear) {
 
 			if (dayOfWeek == 1) {
 
@@ -78,16 +79,8 @@ public class Calendar {
  
     // Returns true if the given year is a leap year, false otherwise.
 	private static boolean isLeapYear(int year) {
-
-		if ((year % 4 == 0) || ((year % 100 == 0) && (year % 400 != 0))){
-
-			return true;
-
-		} else {
-
-			return false;
-
-		}
+		// #feedback: the result of condition is the exact as the return value
+		return ((year % 4 == 0) || ((year % 100 == 0) && (year % 400 != 0)));
 		}
 		
 	 
