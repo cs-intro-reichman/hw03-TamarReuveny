@@ -17,15 +17,14 @@ public class UniqueChars {
 
         for (int i = 0 ; i < str.length() ; i++) {
 
-            char char1 = str.charAt(i);
+            // #feedback: use better name
+            char currentChar = str.charAt(i);
 
-            if (char1 == ' ') {
+            // #feedback: you could done it with one condition
+            // #feedback: why did you use this? you already hold the currentChar
+            if ((currentChar == ' ') || (newString.indexOf(currentChar) == -1)) {
 
-                newString = newString + " ";
-
-            } else if ((newString.indexOf(String.valueOf(char1)) == -1)) {
-
-                  newString = newString + char1;     
+                  newString += char1;     
 
             }
         }
