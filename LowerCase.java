@@ -17,17 +17,18 @@ public class LowerCase {
 
         for (int i = 0 ; i < str.length() ; i++) {
 
-            int strNew = str.charAt(i);
+            // #feedback: misleading name...
+            int currentCharCode = str.charAt(i);
 
-            if (65 <= strNew && strNew <= 90 ) {
+            if (65 <= currentCharCode && currentCharCode <= 90 ) {
 
-                strNew = strNew + 32;
+                currentCharCode += 32;
 
-                newString = newString + (char) strNew;
+                newString += (char) strNew;
 
             } else {
 
-                newString = newString + str.charAt(i);
+                newString += str.charAt(i);
             } 
         }
 
